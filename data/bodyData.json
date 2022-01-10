@@ -1,0 +1,489 @@
+{
+	"StarSystems": [
+		{
+			"id": "ksp",
+			"name": "Kerbol System [Stock]",
+			"bodies": [
+				{
+					"id": "ksp-kerbol",
+					"name": "Kerbol",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": null
+				},
+				{
+					"id": "ksp-moho",
+					"name": "Moho",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "ksp-kerbol"
+				},
+				{
+					"id": "ksp-eve",
+					"name": "Eve",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "ksp-kerbol"
+				},
+				{
+					"id": "ksp-gilly",
+					"name": "└ Gilly",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "ksp-eve"
+				},
+				{
+					"id": "ksp-kerbin",
+					"name": "Kerbin",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "ksp-kerbol"
+				},
+				{
+					"id": "ksp-mun",
+					"name": "└ Mun",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "ksp-kerbin"
+				},
+				{
+					"id": "ksp-minmus",
+					"name": "└ Minmus",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "ksp-kerbin"
+				},
+				{
+					"id": "ksp-duna",
+					"name": "Duna",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "ksp-kerbol"
+				},
+				{
+					"id": "ksp-ike",
+					"name": "└ Ike",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "ksp-duna"
+				},
+				{
+					"id": "ksp-dres",
+					"name": "Dres",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "ksp-kerbol"
+				},
+				{
+					"id": "ksp-jool",
+					"name": "Jool",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "ksp-kerbol"
+				},
+				{
+					"id": "ksp-laythe",
+					"name": "└ Laythe",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "ksp-jool"
+				},
+				{
+					"id": "ksp-vall",
+					"name": "└ Vall",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "ksp-jool"
+				},
+				{
+					"id": "ksp-tylo",
+					"name": "└ Tylo",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "ksp-jool"
+				},
+				{
+					"id": "ksp-bop",
+					"name": "└ Bop",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "ksp-jool"
+				},
+				{
+					"id": "ksp-pol",
+					"name": "└ Pol",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "ksp-jool"
+				},
+				{
+					"id": "ksp-eeloo",
+					"name": "Eeloo",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "ksp-kerbol"
+				}
+			]
+		},
+		{
+			"id": "rss",
+			"name": "Real Solar System",
+			"bodies": [
+				{
+					"id": "rss-sun",
+					"name": "Sun",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": null
+				},
+				{
+					"id": "rss-mercury",
+					"name": "Mercury",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-sun"
+				},
+				{
+					"id": "rss-venus",
+					"name": "Venus",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-sun"
+				},
+				{
+					"id": "rss-earth",
+					"name": "Earth",
+					"radius": 6371000,
+					"mass": null,
+					"rotationPeriod": 86164.098903691,
+					"gravParameter": 3.986004418e+14,
+					"atmHeight": 140000.0,
+					"spaceHigh": 35786000,
+					"parentId": "rss-sun"
+				},
+				{
+					"id": "rss-moon",
+					"name": "└ Moon",
+					"radius": 1737100,
+					"mass": 7.3476731e+22,
+					"rotationPeriod": 2360584.68479999,
+					"gravParameter": null,
+					"atmHeight": 0,
+					"spaceHigh": 200000,
+					"parentId": "rss-earth"
+				},
+				{
+					"id": "rss-mars",
+					"name": "Mars",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-sun"
+				},
+				{
+					"id": "rss-phobos",
+					"name": "└ Phobos",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-mars"
+				},
+				{
+					"id": "rss-deimos",
+					"name": "└ Deimos",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-mars"
+				},
+				{
+					"id": "rss-jupiter",
+					"name": "Jupiter",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-sun"
+				},
+				{
+					"id": "rss-io",
+					"name": "└ Io",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-jupiter"
+				},
+				{
+					"id": "rss-europa",
+					"name": "└ Europa",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-jupiter"
+				},
+				{
+					"id": "rss-ganymede",
+					"name": "└ Ganymede",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-jupiter"
+				},
+				{
+					"id": "rss-callisto",
+					"name": "└ Callisto",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-jupiter"
+				},
+				{
+					"id": "rss-saturn",
+					"name": "Saturn",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-sun"
+				},
+				{
+					"id": "rss-mimas",
+					"name": "└ Mimas",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-saturn"
+				},
+				{
+					"id": "rss-enceladus",
+					"name": "└ Enceladus",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-saturn"
+				},
+				{
+					"id": "rss-thetys",
+					"name": "└ Thetys",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-saturn"
+				},
+				{
+					"id": "rss-dione",
+					"name": "└ Dione",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-saturn"
+				},
+				{
+					"id": "rss-rhea",
+					"name": "└ Rhea",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-saturn"
+				},
+				{
+					"id": "rss-titan",
+					"name": "└ Titan",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-saturn"
+				},
+				{
+					"id": "rss-iapetus",
+					"name": "└ Iapetus",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-saturn"
+				},
+				{
+					"id": "rss-uranus",
+					"name": "Uranus",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-sun"
+				},
+				{
+					"id": "rss-neptune",
+					"name": "Neptune",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-sun"
+				},
+				{
+					"id": "rss-triton",
+					"name": "└ Triton",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-neptune"
+				},
+				{
+					"id": "rss-pluto",
+					"name": "Pluto",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-sun"
+				},
+				{
+					"id": "rss-charon",
+					"name": "└ Charon",
+					"radius": null,
+					"mass": null,
+					"rotationPeriod": null,
+					"gravParameter": null,
+					"atmHeight": null,
+					"spaceHigh": null,
+					"parentId": "rss-pluto"
+				}
+			]
+		}
+	]
+}

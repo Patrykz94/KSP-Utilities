@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="styles/main.css">
+	<title>Home</title>
+</head>
+
+<body>
+	<header>
+		<h1>Orbital Calculator for Kerbal Space Program</h1>
+	</header>
+	<main>
+		<section>
+			<div class="section-title section-blue">Orbit Data</div>
+			<div class="section-content clearfix">
+				<form id="od" class="clearfix">
+					<div class="column">
+						<fieldset>
+							<legend>Body Information</legend>
+							<div class="form-field clearfix">
+								<label>Start System<span class="asterisk">*</span></label>
+								<select id="od-system" name="star-system" onchange='javascript:populateBodies("od")'>
+									<option disabled selected value> -- Select -- </option>
+								</select>
+							</div>
+							<div class="form-field-divider"></div>
+							<div class="form-field clearfix">
+								<label>Body<span class="asterisk">*</span></label>
+								<select id="od-body" name="body" onchange='javascript:populateBodyData("od")'>
+									<option disabled selected value> -- Select -- </option>
+								</select>
+							</div><br>
+							<div class="form-field clearfix">
+								<label>Radius [km]</label>
+								<input type="number" step="any" id="od-radius" readonly />
+							</div>
+							<div class="form-field-divider"></div>
+							<div class="form-field clearfix">
+								<label>Atmosphere Height [km]</label>
+								<input type="number" step="any" id="od-atmHeight" readonly />
+							</div>
+							<div class="form-field-divider"></div>
+							<div class="form-field clearfix">
+								<label>High Space Altitude [km]</label>
+								<input type="number" step="any" id="od-spaceHigh" readonly />
+							</div>
+							<div class="form-field-divider"></div>
+							<div class="form-field clearfix">
+								<label>Synchronous Altitude [km]</label>
+								<input type="number" step="any" id="od-synchronousAlt" readonly />
+							</div>
+							<div class="form-field-divider"></div>
+							<div class="form-field clearfix">
+								<label>Rotation Period [s]</label>
+								<input type="number" step="any" id="od-rotationPeriod" readonly />
+							</div>
+						</fieldset>
+					</div>
+					<div class="column">
+						<fieldset>
+							<legend>Orbit Information</legend>
+							<div class="form-field clearfix">
+								<label for="current-ap">Apoapsis [km]<span class="asterisk">*</span></label>
+								<input type="number" oninput='javascript:recalculateOrbitData("od")' step="any"
+									id="od-apoapsis" />
+							</div>
+							<div class="form-field-divider"></div>
+							<div class="form-field clearfix">
+								<label>Periapsis [km]<span class="asterisk">*</span></label>
+								<input type="number" oninput='javascript:recalculateOrbitData("od")' step="any"
+									id="od-periapsis" />
+							</div><br>
+							<div class="form-field clearfix">
+								<label>Semi-major Axis [km]</label>
+								<input type="number" step="any" id="od-semiMajorAxis" readonly />
+							</div>
+							<div class="form-field-divider"></div>
+							<div class="form-field clearfix">
+								<label>Apoapsis Speed [m/s]</label>
+								<input type="number" step="any" id="od-apoSpeed" readonly />
+							</div>
+							<div class="form-field-divider"></div>
+							<div class="form-field clearfix">
+								<label>Periapsis Speed [m/s]</label>
+								<input type="number" step="any" id="od-periSpeed" readonly />
+							</div>
+							<div class="form-field-divider"></div>
+							<div class="form-field clearfix">
+								<label>Orbit Eccentricity [0-1]</label>
+								<input type="number" step="any" id="od-eccentricity" readonly />
+							</div>
+							<div class="form-field-divider"></div>
+							<div class="form-field clearfix">
+								<label>Orbit Period [s]</label>
+								<input type="number" step="any" id="od-period" readonly />
+							</div>
+						</fieldset>
+					</div>
+				</form>
+			</div>
+		</section>
+		<section>
+			<div class="section-title section-red">Hohmann Transfer ΔV</div>
+			<div class="section-content clearfix">
+				<form id="ht">
+					<div class="column">
+						<fieldset>
+							<legend>Body Information</legend>
+							<div class="form-field clearfix">
+								<label>Start System:</label>
+								<select id="ht-system" name="star-system" onchange='javascript:populateBodies("ht")'>
+									<option disabled selected value> -- Select -- </option>
+								</select>
+							</div>
+							<div class="form-field-divider"></div>
+							<div class="form-field clearfix">
+								<label for="body">Body:</label>
+								<select id="ht-body">
+									<option disabled selected value> -- Select -- </option>
+								</select>
+							</div>
+						</fieldset>
+						<fieldset>
+							<legend>Current Orbit</legend>
+							<div class="form-field clearfix">
+								<label for="current-ap">Current Apoapsis [km]:</label>
+								<input type="number" step="any" name="current-ap" placeholder="e.g. 250" />
+							</div>
+							<div class="form-field-divider"></div>
+							<div class="form-field clearfix">
+								<label>Current Periapsis [km]:</label>
+								<input type="number" step="any" name="current-pe" placeholder="e.g. 250" />
+							</div>
+							<div class="form-field-divider"></div>
+							<div class="form-field clearfix">
+								<label>Current Inclination [°]:</label>
+								<input type="number" step="any" min="0" max="180" name="current-inc"
+									placeholder="e.g. 28.5" />
+							</div>
+						</fieldset>
+						<fieldset>
+							<legend>Target Orbit</legend>
+							<div class="form-field clearfix">
+								<label>Target Apoapsis [km]:</label>
+								<input type="number" step="any" name="target-ap" placeholder="e.g. 250" />
+							</div>
+							<div class="form-field-divider"></div>
+							<div class="form-field clearfix">
+								<label>Target Periapsis [km]:</label>
+								<input type="number" step="any" name="target-pe" placeholder="e.g. 250" />
+							</div>
+							<div class="form-field-divider"></div>
+							<div class="form-field clearfix">
+								<label>Target Inclination [°]:</label>
+								<input type="number" step="any" min="0" max="180" name="target-inc"
+									placeholder="e.g. 28.5" />
+							</div>
+						</fieldset>
+					</div>
+				</form>
+			</div>
+		</section>
+	</main>
+	<script src="scripts/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,160 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html, body {
+	width: 100%;
+	height: auto;
+}
+
+body, button {
+	background-color: #eeeeee;
+	color: #2b2b2b;
+	font-size: 100%;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+}
+
+.clearfix {
+	overflow: auto;
+}
+
+/* Main content */
+main, header {
+	width: 100%;
+	height: auto;
+	font-size: 1em;
+	padding: 0.5em;
+}
+
+header {
+	padding: 1em;
+}
+
+section {
+	float: left;
+	max-width: 65em;
+	border-radius: 5px;
+	overflow: auto;
+	box-shadow: 5px 5px 15px #00000033 !important;
+	margin: 0.5em;
+}
+
+.column {
+	float: left;
+	display: block;
+	width: 30em;
+	margin: 0 0.5em;
+}
+
+.section-title {
+	padding: 0.25em 1em;
+	text-align: center;
+	font-size: 1.2em;
+}
+
+.section-red {
+	background-color: rgb(255, 30, 30);
+	color: #eeeeee;
+}
+
+.section-blue {
+	background-color: rgb(0, 120, 255);
+	color: #eeeeee;
+}
+
+.section-green {
+	background-color: rgb(0, 155, 0);
+	color: #eeeeee;
+}
+
+.section-yellow {
+	background-color: rgb(255, 255, 0);
+	color: #333333;
+	font-weight: 600;
+}
+
+.section-orange {
+	background-color: rgb(255, 140, 0);
+	color: #eeeeee;
+}
+
+.section-content {
+	padding: 0.5em;
+	background-color: #fcfcfc;
+}
+
+.asterisk {
+	color: #ff0000;
+}
+
+/* Form styles */
+form {
+	width: 100%;
+	margin: auto;
+}
+
+fieldset {
+	border-radius: 5px;
+	border: 1px solid;
+	border-color: #e5e5e5;
+	margin-bottom: 0.5em;
+}
+
+legend {
+	margin: 0 1em;
+	font-weight: bold;
+}
+
+.form-field {
+	width: 100%;
+	margin: auto;
+	padding: 5px 0;
+	clear: both;
+	color: #555;
+}
+
+.form-field label, .form-field input, .form-field select, .form-field output {
+	float: left;
+	vertical-align: center;
+	margin: 0 2.5%;
+	font-size: 1em;
+}
+
+.form-field label, .form-field output {
+	width: 45%;
+}
+
+.form-field input, .form-field select {
+	width: 45%;
+	border-style: none;
+	padding: 0 2.5%;
+	box-shadow: 1px 1px 3px #00000033;
+	text-align-last: center;
+	-ms-text-align-last: center;
+	-moz-text-align-last: center;
+}
+
+.form-field input[type="submit"] {
+	width: 90%;
+}
+
+.form-field input[type="number"]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}
+
+.form-field input:read-only {
+	font-style: italic;
+	color:#555;
+	background-color: #f7f7f7;
+}
+
+.form-field-divider {
+	clear: both;
+	width: 90%;
+	height: 1px;
+	background-color: #e5e5e5;
+	margin: 0 5%;
+}
