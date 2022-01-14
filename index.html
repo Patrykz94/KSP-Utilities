@@ -35,27 +35,38 @@
 							</div><br>
 							<div class="form-field clearfix">
 								<label>Radius [km]</label>
-								<input type="number" step="any" id="od-radius" readonly />
+								<input type="number" step="any" id="od-radius" onblur="javascript:mask(this)"
+									onfocus="javascript:unmask(this)" readonly />
 							</div>
 							<div class="form-field-divider"></div>
 							<div class="form-field clearfix">
 								<label>Atmosphere Height [km]</label>
-								<input type="number" step="any" id="od-atmHeight" readonly />
+								<input type="number" step="any" id="od-atmHeight" onblur="javascript:mask(this)"
+									onfocus="javascript:unmask(this)" readonly />
 							</div>
 							<div class="form-field-divider"></div>
 							<div class="form-field clearfix">
 								<label>High Space Altitude [km]</label>
-								<input type="number" step="any" id="od-spaceHigh" readonly />
+								<input type="number" step="any" id="od-spaceHigh" onblur="javascript:mask(this)"
+									onfocus="javascript:unmask(this)" readonly />
 							</div>
 							<div class="form-field-divider"></div>
 							<div class="form-field clearfix">
 								<label>Synchronous Altitude [km]</label>
-								<input type="number" step="any" id="od-synchronousAlt" readonly />
+								<input type="number" step="any" id="od-synchronousAlt" onblur="javascript:mask(this)"
+									onfocus="javascript:unmask(this)" readonly />
+							</div>
+							<div class="form-field-divider"></div>
+							<div class="form-field clearfix">
+								<label>SOI Altitude [km]</label>
+								<input type="number" step="any" id="od-soiAltitude" onblur="javascript:mask(this)"
+									onfocus="javascript:unmask(this)" readonly />
 							</div>
 							<div class="form-field-divider"></div>
 							<div class="form-field clearfix">
 								<label>Rotation Period [s]</label>
-								<input type="number" step="any" id="od-rotationPeriod" readonly />
+								<input type="number" step="any" id="od-rotationPeriod" onblur="javascript:mask(this)"
+									onfocus="javascript:unmask(this)" readonly />
 							</div>
 						</fieldset>
 					</div>
@@ -65,37 +76,43 @@
 							<div class="form-field clearfix">
 								<label for="current-ap">Apoapsis [km]<span class="asterisk">*</span></label>
 								<input type="number" oninput='javascript:recalculateOrbitData("od")' step="any"
-									id="od-apoapsis" />
+									id="od-apoapsis" onblur="javascript:mask(this)" onfocus="javascript:unmask(this)" />
 							</div>
 							<div class="form-field-divider"></div>
 							<div class="form-field clearfix">
 								<label>Periapsis [km]<span class="asterisk">*</span></label>
 								<input type="number" oninput='javascript:recalculateOrbitData("od")' step="any"
-									id="od-periapsis" />
+									id="od-periapsis" onblur="javascript:mask(this)"
+									onfocus="javascript:unmask(this)" />
 							</div><br>
 							<div class="form-field clearfix">
 								<label>Semi-major Axis [km]</label>
-								<input type="number" step="any" id="od-semiMajorAxis" readonly />
+								<input type="number" step="any" id="od-semiMajorAxis" onblur="javascript:mask(this)"
+									onfocus="javascript:unmask(this)" readonly />
 							</div>
 							<div class="form-field-divider"></div>
 							<div class="form-field clearfix">
 								<label>Apoapsis Speed [m/s]</label>
-								<input type="number" step="any" id="od-apoSpeed" readonly />
+								<input type="number" step="any" id="od-apoSpeed" onblur="javascript:mask(this)"
+									onfocus="javascript:unmask(this)" readonly />
 							</div>
 							<div class="form-field-divider"></div>
 							<div class="form-field clearfix">
 								<label>Periapsis Speed [m/s]</label>
-								<input type="number" step="any" id="od-periSpeed" readonly />
+								<input type="number" step="any" id="od-periSpeed" onblur="javascript:mask(this)"
+									onfocus="javascript:unmask(this)" readonly />
 							</div>
 							<div class="form-field-divider"></div>
 							<div class="form-field clearfix">
 								<label>Orbit Eccentricity [0-1]</label>
-								<input type="number" step="any" id="od-eccentricity" readonly />
+								<input type="number" step="any" id="od-eccentricity" onblur="javascript:mask(this)"
+									onfocus="javascript:unmask(this)" readonly />
 							</div>
 							<div class="form-field-divider"></div>
 							<div class="form-field clearfix">
 								<label>Orbit Period [s]</label>
-								<input type="number" step="any" id="od-period" readonly />
+								<input type="number" step="any" id="od-period" onblur="javascript:mask(this)"
+									onfocus="javascript:unmask(this)" readonly />
 							</div>
 						</fieldset>
 					</div>

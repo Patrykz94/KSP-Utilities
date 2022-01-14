@@ -46,6 +46,7 @@ class Body {
 	atmHeight;
 	spaceHigh;
 	synchronousHeight;
+	soiAltitude;
 	hasParent;
 	parentId;
 
@@ -60,6 +61,7 @@ class Body {
 		this.atmHeight = bodyArray.atmHeight;
 		this.hasAtmosphere = this.atmHeight > 0;
 		this.spaceHigh = bodyArray.spaceHigh;
+		this.soiAltitude = bodyArray.soiRadius + this.radius;
 		this.parentId = bodyArray.parentId;
 		this.hasParent = this.parentId != null;
 
@@ -71,6 +73,9 @@ class Body {
 		}
 
 		this.synchronousHeight = Math.pow((this.gravParameter * Math.pow(this.rotationPeriod, 2)) / (4 * Math.pow(Math.PI, 2)), 1 / 3) - this.radius;
+		if (this.synchronousHeight > this.soiAltitude && this.soiAltitude != null) {
+			this.synchronousHeight = null;
+		}
 	}
 
 	calculateMass() {
@@ -83,20 +88,6 @@ class Body {
 }
 
 var allPlanets = new PlanetManager();
-
-// fetching the JSON file with all planet and star data
-{
-	// fetch('./data/bodyData.json')
-	// 	.then(function (response) {
-	// 		return response.json();
-	// 	})
-	// 	.then(function (data) {
-	// 		// load the star system with all planets
-	// 		createStarSystems(data);
-	// 		// once we have all data loaded, populate the star system dropdowns
-	// 		populateSystems();
-	// 	});
-}
 
 async function loadData() {
 	const response = await fetch('./data/bodyData.json');
@@ -191,32 +182,58 @@ function populateBodyData(sectionID) {
 	// Get the required html elements and fill in data from body
 	var radiusElement = document.getElementById(sectionID + "-radius");
 	radiusElement.value = typeof (body.radius) == "number" ? body.radius / 1000 : null;
+	mask(radiusElement);
 
 	var atmHeightElement = document.getElementById(sectionID + "-atmHeight");
 	atmHeightElement.value = (typeof (body.atmHeight) == "number") && body.atmHeight > 0 ? body.atmHeight / 1000 : null;
+	mask(atmHeightElement);
 
 	var spaceHighElement = document.getElementById(sectionID + "-spaceHigh");
 	spaceHighElement.value = typeof (body.spaceHigh) == "number" ? body.spaceHigh / 1000 : null;
+	mask(spaceHighElement);
 
 	var synchronousAltElement = document.getElementById(sectionID + "-synchronousAlt");
 	synchronousAltElement.value = typeof (body.synchronousHeight) == "number" ? body.synchronousHeight / 1000 : null;
+	mask(synchronousAltElement);
+
+	var soiAltitudeElement = document.getElementById(sectionID + "-soiAltitude");
+	soiAltitudeElement.value = typeof (body.soiAltitude) == "number" ? body.soiAltitude / 1000 : null;
+	mask(soiAltitudeElement);
 
 	var periodElement = document.getElementById(sectionID + "-rotationPeriod");
 	var obtPeriod = body.rotationPeriod;
 	periodElement.value = typeof (obtPeriod) == "number" ? obtPeriod : null;
 	periodElement.title = formatTime(obtPeriod);
+	mask(periodElement);
 
-	recalculateOrbitData(sectionID);
+	// if a different body was selected, we want to recalculate the orbit information
+	recalculateOrbitData(sectionID, true);
 }
 
-function recalculateOrbitData(sectionID) {
+function recalculateOrbitData(sectionID, refreshValues = false) {
 	// Get selected body ID
 	var bodyElement = document.getElementById(sectionID + "-body");
 	var bodyID = bodyElement.options[bodyElement.selectedIndex].value;
 	var body = allPlanets.getBody(bodyID);
 
-	var currentApo = document.getElementById(sectionID + "-apoapsis").value * 1000;
-	var currentPeri = document.getElementById(sectionID + "-periapsis").value * 1000;
+	if (body == null) { return; }
+
+	var currentApoElement = document.getElementById(sectionID + "-apoapsis");
+	var currentPeriElement = document.getElementById(sectionID + "-periapsis");
+
+	if (refreshValues) {
+		if (currentApoElement.hasAttribute('data-unmasked')) {
+			currentApoElement.value = currentApoElement.getAttribute('data-unmasked');
+			mask(currentApoElement);
+		}
+		if (currentPeriElement.hasAttribute('data-unmasked')) {
+			currentPeriElement.value = currentPeriElement.getAttribute('data-unmasked');
+			mask(currentPeriElement);
+		}
+	}
+
+	var currentApo = document.activeElement === currentApoElement ? currentApoElement.value * 1000 : currentApoElement.getAttribute('data-unmasked') * 1000;
+	var currentPeri = document.activeElement === currentPeriElement ? currentPeriElement.value * 1000 : currentPeriElement.getAttribute('data-unmasked') * 1000;
 
 	var validInput = currentApo != 0 && currentPeri != 0;
 
@@ -224,20 +241,25 @@ function recalculateOrbitData(sectionID) {
 
 	var smaElement = document.getElementById(sectionID + "-semiMajorAxis");
 	smaElement.value = validInput ? semiMajorAxis / 1000 : null;
+	mask(smaElement);
 
 	var apoSpeedElement = document.getElementById(sectionID + "-apoSpeed");
 	apoSpeedElement.value = validInput ? getOrbitalSpeed(currentApo, semiMajorAxis, body) : null;
+	mask(apoSpeedElement);
 
 	var periSpeedElement = document.getElementById(sectionID + "-periSpeed");
 	periSpeedElement.value = validInput ? getOrbitalSpeed(currentPeri, semiMajorAxis, body) : null;
+	mask(periSpeedElement);
 
 	var eccElement = document.getElementById(sectionID + "-eccentricity");
 	eccElement.value = validInput ? getOrbitEccentricity(currentApo, currentPeri, body) : null;
+	mask(eccElement);
 
 	var periodElement = document.getElementById(sectionID + "-period");
 	var obtPeriod = getOrbitPeriod(semiMajorAxis, body);
 	periodElement.value = validInput ? obtPeriod : null;
 	periodElement.title = validInput ? formatTime(obtPeriod) : null;
+	mask(periodElement);
 }
 
 function getSemiMajorAxis(apoapsis, periapsis, body) {
@@ -269,22 +291,24 @@ function removeOptions(id) {
 	}
 }
 
-// format the time in (y d h m s) format for the tool tip
+// format the time in (y d h m s) format
 function formatTime(timeSpan) {
-	var years = Math.floor(timeSpan / (60 * 60 * 24 * 365));
-	timeSpan -= years * (60 * 60 * 24 * 365);
+	var timeSpanAbs = Math.abs(timeSpan);
 
-	var days = Math.floor(timeSpan / (60 * 60 * 24));
-	timeSpan -= days * (60 * 60 * 24);
+	var years = Math.floor(timeSpanAbs / (60 * 60 * 24 * 365));
+	timeSpanAbs -= years * (60 * 60 * 24 * 365);
 
-	var hours = Math.floor(timeSpan / (60 * 60));
-	timeSpan -= hours * (60 * 60);
+	var days = Math.floor(timeSpanAbs / (60 * 60 * 24));
+	timeSpanAbs -= days * (60 * 60 * 24);
 
-	var mins = Math.floor(timeSpan / (60));
-	timeSpan -= mins * (60);
+	var hours = Math.floor(timeSpanAbs / (60 * 60));
+	timeSpanAbs -= hours * (60 * 60);
 
-	var seconds = Math.floor(timeSpan);
-	timeSpan -= seconds;
+	var mins = Math.floor(timeSpanAbs / (60));
+	timeSpanAbs -= mins * (60);
+
+	var seconds = formatNumber(timeSpanAbs, 3);
+	timeSpanAbs -= seconds;
 
 	var outputString = "";
 
@@ -299,6 +323,23 @@ function formatTime(timeSpan) {
 	return outputString;
 }
 
-loadData();
+// better rounding function that rounds to specified decimal places
+function formatNumber(number, decimalPlaces = 0) {
+	var multiplier = Math.pow(10, decimalPlaces);
+	number = Math.round(number * multiplier);
+	number = number / multiplier;
 
-formatTime(86164.098903691);
+	return number;
+}
+
+function mask(element, decimalPlaces = 3) {
+	element.setAttribute('data-unmasked', element.value);
+	element.value = formatNumber(element.value, decimalPlaces);
+}
+
+function unmask(element) {
+	element.value = element.getAttribute('data-unmasked') || '';
+}
+
+// load data from JSON file
+loadData();
