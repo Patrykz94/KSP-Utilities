@@ -72,6 +72,10 @@ class Body {
 			this.calculateGravParam();
 		}
 
+		if (this.soiAltitude == this.radius) {
+			this.soiAltitude = null;
+		}
+
 		this.synchronousHeight = Math.pow((this.gravParameter * Math.pow(this.rotationPeriod, 2)) / (4 * Math.pow(Math.PI, 2)), 1 / 3) - this.radius;
 		if (this.synchronousHeight > this.soiAltitude && this.soiAltitude != null) {
 			this.synchronousHeight = null;
@@ -181,33 +185,49 @@ function populateBodyData(sectionID) {
 
 	// Get the required html elements and fill in data from body
 	var radiusElement = document.getElementById(sectionID + "-radius");
-	radiusElement.value = typeof (body.radius) == "number" ? body.radius / 1000 : null;
-	mask(radiusElement);
+	if (radiusElement != null) {
+		radiusElement.value = typeof (body.radius) == "number" ? body.radius / 1000 : null;
+		mask(radiusElement);
+	}
 
 	var atmHeightElement = document.getElementById(sectionID + "-atmHeight");
-	atmHeightElement.value = (typeof (body.atmHeight) == "number") && body.atmHeight > 0 ? body.atmHeight / 1000 : null;
-	mask(atmHeightElement);
+	if (atmHeightElement != null) {
+		atmHeightElement.value = (typeof (body.atmHeight) == "number") && body.atmHeight > 0 ? body.atmHeight / 1000 : null;
+		mask(atmHeightElement);
+	}
 
 	var spaceHighElement = document.getElementById(sectionID + "-spaceHigh");
-	spaceHighElement.value = typeof (body.spaceHigh) == "number" ? body.spaceHigh / 1000 : null;
-	mask(spaceHighElement);
+	if (spaceHighElement != null) {
+		spaceHighElement.value = typeof (body.spaceHigh) == "number" ? body.spaceHigh / 1000 : null;
+		mask(spaceHighElement);
+	}
 
 	var synchronousAltElement = document.getElementById(sectionID + "-synchronousAlt");
-	synchronousAltElement.value = typeof (body.synchronousHeight) == "number" ? body.synchronousHeight / 1000 : null;
-	mask(synchronousAltElement);
+	if (synchronousAltElement != null) {
+		synchronousAltElement.value = typeof (body.synchronousHeight) == "number" ? body.synchronousHeight / 1000 : null;
+		mask(synchronousAltElement);
+	}
 
 	var soiAltitudeElement = document.getElementById(sectionID + "-soiAltitude");
-	soiAltitudeElement.value = typeof (body.soiAltitude) == "number" ? body.soiAltitude / 1000 : null;
-	mask(soiAltitudeElement);
+	if (soiAltitudeElement != null) {
+		soiAltitudeElement.value = typeof (body.soiAltitude) == "number" ? body.soiAltitude / 1000 : null;
+		mask(soiAltitudeElement);
+	}
 
 	var periodElement = document.getElementById(sectionID + "-rotationPeriod");
-	var obtPeriod = body.rotationPeriod;
-	periodElement.value = typeof (obtPeriod) == "number" ? obtPeriod : null;
-	periodElement.title = formatTime(obtPeriod);
-	mask(periodElement);
+	if (periodElement != null) {
+		var obtPeriod = body.rotationPeriod;
+		periodElement.value = typeof (obtPeriod) == "number" ? obtPeriod : null;
+		periodElement.title = formatTime(obtPeriod);
+		mask(periodElement);
+	}
 
 	// if a different body was selected, we want to recalculate the orbit information
-	recalculateOrbitData(sectionID, true);
+	if (sectionID == "od") { // <-------------------- Temporary workaround
+		recalculateOrbitData(sectionID, true);
+	} else if (sectionID == "ro") {
+		recalculateResonantOrbitData(sectionID, true);
+	}
 }
 
 function recalculateOrbitData(sectionID, refreshValues = false) {
@@ -220,6 +240,8 @@ function recalculateOrbitData(sectionID, refreshValues = false) {
 
 	var currentApoElement = document.getElementById(sectionID + "-apoapsis");
 	var currentPeriElement = document.getElementById(sectionID + "-periapsis");
+
+	if (currentApoElement == null || currentPeriElement == null) { return; }
 
 	if (refreshValues) {
 		if (currentApoElement.hasAttribute('data-unmasked')) {
@@ -262,8 +284,111 @@ function recalculateOrbitData(sectionID, refreshValues = false) {
 	mask(periodElement);
 }
 
+function recalculateResonantOrbitData(sectionID, refreshValues = false) {
+	// Get selected body ID
+	var bodyElement = document.getElementById(sectionID + "-body");
+	var bodyID = bodyElement.options[bodyElement.selectedIndex].value;
+	var body = allPlanets.getBody(bodyID);
+
+	// Make sure valid body was selected
+	if (body == null) { return; }
+
+	// Get all required input fields
+	var altitudeElement = document.getElementById(sectionID + "-altitude");
+	var numSatsElement = document.getElementById(sectionID + "-numSats");
+	var orbitSkipElement = document.getElementById(sectionID + "-orbitSkip");
+	var orbitUnderElement = document.getElementById(sectionID + "-orbitUnder");
+	var orbitOverElement = document.getElementById(sectionID + "-orbitOver");
+
+	// Handle values when changing body
+	if (refreshValues) {
+		if (altitudeElement.hasAttribute('data-unmasked')) {
+			altitudeElement.value = altitudeElement.getAttribute('data-unmasked');
+			mask(altitudeElement);
+		}
+		if (numSatsElement.hasAttribute('data-unmasked')) {
+			numSatsElement.value = numSatsElement.getAttribute('data-unmasked');
+			mask(numSatsElement);
+		}
+		if (orbitSkipElement.hasAttribute('data-unmasked')) {
+			orbitSkipElement.value = orbitSkipElement.getAttribute('data-unmasked');
+			mask(orbitSkipElement);
+		}
+	}
+
+	if (orbitSkipElement.value == null || orbitSkipElement.value < 1) {
+		orbitSkipElement.value = 1;
+		mask(orbitSkipElement);
+	} else if (orbitSkipElement.value > 10) {
+		orbitSkipElement.value = 10;
+		mask(orbitSkipElement);
+	}
+
+	// get all input values
+	var altitude = document.activeElement === altitudeElement ? altitudeElement.value * 1000 : altitudeElement.getAttribute('data-unmasked') * 1000;
+	var numSats = formatNumber(document.activeElement === numSatsElement ? numSatsElement.value : numSatsElement.getAttribute('data-unmasked'));
+	var orbitSkip = formatNumber(document.activeElement === orbitSkipElement ? orbitSkipElement.value : orbitSkipElement.getAttribute('data-unmasked'));
+	var orbitUnder = orbitUnderElement.checked ? true : false;
+
+	// make sure input is valid
+	var validInput = altitude != 0 && numSats != 0 && orbitSkip >= 1 && orbitSkip <= 10;
+
+	if (validInput) {
+		// calculate the period, semi-major axis, apoapsis and periapsis of the resonant orbit
+		var finalSemiMajorAxis = getSemiMajorAxis(altitude, altitude, body);
+		var finalPeriod = getOrbitPeriod(finalSemiMajorAxis, body);
+		var resonantPeriod = orbitUnder ? finalPeriod - (finalPeriod / (numSats * orbitSkip)) : finalPeriod + (finalPeriod / (numSats * orbitSkip));
+		var resonantSemiMajorAxis = getSemiMajorAxisFromPeriod(resonantPeriod, body);
+		var apoapsis = altitude;
+		var periapsis = (resonantSemiMajorAxis - body.radius) * 2 - apoapsis;
+
+		// make sure apoapsis and periapsis are in the correct order
+		if (!orbitUnder) {
+			apoapsis = periapsis;
+			periapsis = altitude;
+		}
+
+		// calculate the deltaV required for the maneuver
+		var resonantOrbitSpeed = getOrbitalSpeed(altitude, resonantSemiMajorAxis, body);
+		var finalOrbitSpeed = getOrbitalSpeed(altitude, finalSemiMajorAxis, body);
+		var deltaV = Math.abs(resonantOrbitSpeed - finalOrbitSpeed);
+	}
+
+	// display results in the result fields
+	var apoapsisElement = document.getElementById(sectionID + "-apoapsis");
+	apoapsisElement.value = validInput ? apoapsis / 1000 : null;
+	mask(apoapsisElement);
+
+	var periapsisElement = document.getElementById(sectionID + "-periapsis");
+	periapsisElement.value = validInput ? periapsis / 1000 : null;
+	mask(periapsisElement);
+
+	var deltaVElement = document.getElementById(sectionID + "-deltaV");
+	deltaVElement.value = validInput ? deltaV : null;
+	mask(deltaVElement);
+
+	var finalPeriodElement = document.getElementById(sectionID + "-finalPeriod");
+	finalPeriodElement.value = validInput ? finalPeriod : null;
+	finalPeriodElement.title = validInput ? formatTime(finalPeriod) : null;
+	mask(finalPeriodElement);
+
+	var resonantPeriodElement = document.getElementById(sectionID + "-resonantPeriod");
+	resonantPeriodElement.value = validInput ? resonantPeriod : null;
+	resonantPeriodElement.title = validInput ? formatTime(resonantPeriod) : null;
+	mask(resonantPeriodElement);
+
+	var deltaPeriodElement = document.getElementById(sectionID + "-deltaPeriod");
+	deltaPeriodElement.value = validInput ? finalPeriod - resonantPeriod : null;
+	deltaPeriodElement.title = validInput ? formatTime(finalPeriod - resonantPeriod) : null;
+	mask(deltaPeriodElement);
+}
+
 function getSemiMajorAxis(apoapsis, periapsis, body) {
 	return (apoapsis + periapsis + body.radius * 2) / 2;
+}
+
+function getSemiMajorAxisFromPeriod(period, body) {
+	return Math.pow((body.gravParameter * Math.pow(period, 2)) / (4 * Math.pow(Math.PI, 2)), 1 / 3);
 }
 
 function getOrbitalSpeed(altitude, semiMajorAxis, body) {

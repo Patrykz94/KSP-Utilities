@@ -17,166 +17,219 @@
 			<div class="section-title section-blue">Orbit Data</div>
 			<div class="section-content clearfix">
 				<form id="od" class="clearfix">
-					<div class="column">
-						<fieldset>
-							<legend>Body Information</legend>
-							<div class="form-field clearfix">
-								<label>Start System<span class="asterisk">*</span></label>
-								<select id="od-system" name="star-system" onchange='javascript:populateBodies("od")'>
-									<option disabled selected value> -- Select -- </option>
-								</select>
-							</div>
-							<div class="form-field-divider"></div>
-							<div class="form-field clearfix">
-								<label>Body<span class="asterisk">*</span></label>
-								<select id="od-body" name="body" onchange='javascript:populateBodyData("od")'>
-									<option disabled selected value> -- Select -- </option>
-								</select>
-							</div><br>
-							<div class="form-field clearfix">
-								<label>Radius [km]</label>
-								<input type="number" step="any" id="od-radius" onblur="javascript:mask(this)"
-									onfocus="javascript:unmask(this)" readonly />
-							</div>
-							<div class="form-field-divider"></div>
-							<div class="form-field clearfix">
-								<label>Atmosphere Height [km]</label>
-								<input type="number" step="any" id="od-atmHeight" onblur="javascript:mask(this)"
-									onfocus="javascript:unmask(this)" readonly />
-							</div>
-							<div class="form-field-divider"></div>
-							<div class="form-field clearfix">
-								<label>High Space Altitude [km]</label>
-								<input type="number" step="any" id="od-spaceHigh" onblur="javascript:mask(this)"
-									onfocus="javascript:unmask(this)" readonly />
-							</div>
-							<div class="form-field-divider"></div>
-							<div class="form-field clearfix">
-								<label>Synchronous Altitude [km]</label>
-								<input type="number" step="any" id="od-synchronousAlt" onblur="javascript:mask(this)"
-									onfocus="javascript:unmask(this)" readonly />
-							</div>
-							<div class="form-field-divider"></div>
-							<div class="form-field clearfix">
-								<label>SOI Altitude [km]</label>
-								<input type="number" step="any" id="od-soiAltitude" onblur="javascript:mask(this)"
-									onfocus="javascript:unmask(this)" readonly />
-							</div>
-							<div class="form-field-divider"></div>
-							<div class="form-field clearfix">
-								<label>Rotation Period [s]</label>
-								<input type="number" step="any" id="od-rotationPeriod" onblur="javascript:mask(this)"
-									onfocus="javascript:unmask(this)" readonly />
-							</div>
-						</fieldset>
-					</div>
-					<div class="column">
-						<fieldset>
-							<legend>Orbit Information</legend>
-							<div class="form-field clearfix">
-								<label for="current-ap">Apoapsis [km]<span class="asterisk">*</span></label>
-								<input type="number" oninput='javascript:recalculateOrbitData("od")' step="any"
-									id="od-apoapsis" onblur="javascript:mask(this)" onfocus="javascript:unmask(this)" />
-							</div>
-							<div class="form-field-divider"></div>
-							<div class="form-field clearfix">
-								<label>Periapsis [km]<span class="asterisk">*</span></label>
-								<input type="number" oninput='javascript:recalculateOrbitData("od")' step="any"
-									id="od-periapsis" onblur="javascript:mask(this)"
-									onfocus="javascript:unmask(this)" />
-							</div><br>
-							<div class="form-field clearfix">
-								<label>Semi-major Axis [km]</label>
-								<input type="number" step="any" id="od-semiMajorAxis" onblur="javascript:mask(this)"
-									onfocus="javascript:unmask(this)" readonly />
-							</div>
-							<div class="form-field-divider"></div>
-							<div class="form-field clearfix">
-								<label>Apoapsis Speed [m/s]</label>
-								<input type="number" step="any" id="od-apoSpeed" onblur="javascript:mask(this)"
-									onfocus="javascript:unmask(this)" readonly />
-							</div>
-							<div class="form-field-divider"></div>
-							<div class="form-field clearfix">
-								<label>Periapsis Speed [m/s]</label>
-								<input type="number" step="any" id="od-periSpeed" onblur="javascript:mask(this)"
-									onfocus="javascript:unmask(this)" readonly />
-							</div>
-							<div class="form-field-divider"></div>
-							<div class="form-field clearfix">
-								<label>Orbit Eccentricity [0-1]</label>
-								<input type="number" step="any" id="od-eccentricity" onblur="javascript:mask(this)"
-									onfocus="javascript:unmask(this)" readonly />
-							</div>
-							<div class="form-field-divider"></div>
-							<div class="form-field clearfix">
-								<label>Orbit Period [s]</label>
-								<input type="number" step="any" id="od-period" onblur="javascript:mask(this)"
-									onfocus="javascript:unmask(this)" readonly />
-							</div>
-						</fieldset>
-					</div>
+					<span class="info-section">
+						This section contains information about the selected body and information about the specified
+						orbit.
+					</span>
+					<fieldset class="container">
+						<legend>Body Information</legend>
+						<div class="form-field clearfix">
+							<label>Start System<span class="asterisk">*</span></label>
+							<select id="od-system" name="star-system" onchange='javascript:populateBodies("od")'>
+								<option disabled selected value> -- Select -- </option>
+							</select>
+						</div>
+						<div class="form-field-divider"></div>
+						<div class="form-field clearfix">
+							<label>Body<span class="asterisk">*</span></label>
+							<select id="od-body" name="body" onchange='javascript:populateBodyData("od")'>
+								<option disabled selected value> -- Select -- </option>
+							</select>
+						</div><br>
+						<div class="form-field clearfix">
+							<label>Radius [km]</label>
+							<input type="number" step="any" id="od-radius" onblur="javascript:mask(this)"
+								onfocus="javascript:unmask(this)" readonly />
+						</div>
+						<div class="form-field-divider"></div>
+						<div class="form-field clearfix">
+							<label>Atmosphere Height [km]</label>
+							<input type="number" step="any" id="od-atmHeight" onblur="javascript:mask(this)"
+								onfocus="javascript:unmask(this)" readonly />
+						</div>
+						<div class="form-field-divider"></div>
+						<div class="form-field clearfix">
+							<label>High Space Altitude [km]</label>
+							<input type="number" step="any" id="od-spaceHigh" onblur="javascript:mask(this)"
+								onfocus="javascript:unmask(this)" readonly />
+						</div>
+						<div class="form-field-divider"></div>
+						<div class="form-field clearfix">
+							<label>Synchronous Altitude [km]</label>
+							<input type="number" step="any" id="od-synchronousAlt" onblur="javascript:mask(this)"
+								onfocus="javascript:unmask(this)" readonly />
+						</div>
+						<div class="form-field-divider"></div>
+						<div class="form-field clearfix">
+							<label>SOI Altitude [km]</label>
+							<input type="number" step="any" id="od-soiAltitude" onblur="javascript:mask(this)"
+								onfocus="javascript:unmask(this)" readonly />
+						</div>
+						<div class="form-field-divider"></div>
+						<div class="form-field clearfix">
+							<label>Rotation Period [s]</label>
+							<input type="number" step="any" id="od-rotationPeriod" onblur="javascript:mask(this)"
+								onfocus="javascript:unmask(this)" readonly />
+						</div>
+					</fieldset>
+					<fieldset class="container">
+						<legend>Orbit Information: AP & PE</legend>
+						<div class="form-field clearfix">
+							<label>Apoapsis [km]<span class="asterisk">*</span></label>
+							<input type="number" oninput='javascript:recalculateOrbitData("od")' step="any"
+								id="od-apoapsis" onblur="javascript:mask(this)" onfocus="javascript:unmask(this)" />
+						</div>
+						<div class="form-field-divider"></div>
+						<div class="form-field clearfix">
+							<label>Periapsis [km]<span class="asterisk">*</span></label>
+							<input type="number" oninput='javascript:recalculateOrbitData("od")' step="any"
+								id="od-periapsis" onblur="javascript:mask(this)" onfocus="javascript:unmask(this)" />
+						</div><br>
+						<div class="form-field clearfix">
+							<label>Semi-major Axis [km]</label>
+							<input type="number" step="any" id="od-semiMajorAxis" onblur="javascript:mask(this)"
+								onfocus="javascript:unmask(this)" readonly />
+						</div>
+						<div class="form-field-divider"></div>
+						<div class="form-field clearfix">
+							<label>Apoapsis Speed [m/s]</label>
+							<input type="number" step="any" id="od-apoSpeed" onblur="javascript:mask(this)"
+								onfocus="javascript:unmask(this)" readonly />
+						</div>
+						<div class="form-field-divider"></div>
+						<div class="form-field clearfix">
+							<label>Periapsis Speed [m/s]</label>
+							<input type="number" step="any" id="od-periSpeed" onblur="javascript:mask(this)"
+								onfocus="javascript:unmask(this)" readonly />
+						</div>
+						<div class="form-field-divider"></div>
+						<div class="form-field clearfix">
+							<label>Orbit Eccentricity [0-1]</label>
+							<input type="number" step="any" id="od-eccentricity" onblur="javascript:mask(this)"
+								onfocus="javascript:unmask(this)" readonly />
+						</div>
+						<div class="form-field-divider"></div>
+						<div class="form-field clearfix">
+							<label>Orbit Period [s]</label>
+							<input type="number" step="any" id="od-period" onblur="javascript:mask(this)"
+								onfocus="javascript:unmask(this)" readonly />
+						</div>
+					</fieldset>
 				</form>
 			</div>
 		</section>
 		<section>
-			<div class="section-title section-red">Hohmann Transfer ΔV</div>
+			<div class="section-title section-orange">Resonant Orbit</div>
 			<div class="section-content clearfix">
-				<form id="ht">
-					<div class="column">
-						<fieldset>
-							<legend>Body Information</legend>
-							<div class="form-field clearfix">
-								<label>Start System:</label>
-								<select id="ht-system" name="star-system" onchange='javascript:populateBodies("ht")'>
-									<option disabled selected value> -- Select -- </option>
-								</select>
-							</div>
-							<div class="form-field-divider"></div>
-							<div class="form-field clearfix">
-								<label for="body">Body:</label>
-								<select id="ht-body">
-									<option disabled selected value> -- Select -- </option>
-								</select>
-							</div>
-						</fieldset>
-						<fieldset>
-							<legend>Current Orbit</legend>
-							<div class="form-field clearfix">
-								<label for="current-ap">Current Apoapsis [km]:</label>
-								<input type="number" step="any" name="current-ap" placeholder="e.g. 250" />
-							</div>
-							<div class="form-field-divider"></div>
-							<div class="form-field clearfix">
-								<label>Current Periapsis [km]:</label>
-								<input type="number" step="any" name="current-pe" placeholder="e.g. 250" />
-							</div>
-							<div class="form-field-divider"></div>
-							<div class="form-field clearfix">
-								<label>Current Inclination [°]:</label>
-								<input type="number" step="any" min="0" max="180" name="current-inc"
-									placeholder="e.g. 28.5" />
-							</div>
-						</fieldset>
-						<fieldset>
-							<legend>Target Orbit</legend>
-							<div class="form-field clearfix">
-								<label>Target Apoapsis [km]:</label>
-								<input type="number" step="any" name="target-ap" placeholder="e.g. 250" />
-							</div>
-							<div class="form-field-divider"></div>
-							<div class="form-field clearfix">
-								<label>Target Periapsis [km]:</label>
-								<input type="number" step="any" name="target-pe" placeholder="e.g. 250" />
-							</div>
-							<div class="form-field-divider"></div>
-							<div class="form-field clearfix">
-								<label>Target Inclination [°]:</label>
-								<input type="number" step="any" min="0" max="180" name="target-inc"
-									placeholder="e.g. 28.5" />
-							</div>
-						</fieldset>
-					</div>
+				<form id="ro" class="clearfix">
+					<span class="info-section">
+						A resonant orbit is usually used when deploying satellite constellations. E.g. When
+						deploying 4 satellites, the resonant orbit period should ideally be 1/4 shorter or 1/4 longer
+						than the final orbital period. Satellites would be deployed once per orbit and circularise. That
+						way they would be perfectly spaced out 90 degrees from each other.
+					</span>
+					<fieldset class="container">
+						<legend>Body Information</legend>
+						<div class="form-field clearfix">
+							<label>Start System<span class="asterisk">*</span></label>
+							<select id="ro-system" name="star-system" onchange='javascript:populateBodies("ro")'>
+								<option disabled selected value> -- Select -- </option>
+							</select>
+						</div>
+						<div class="form-field-divider"></div>
+						<div class="form-field clearfix">
+							<label>Body<span class="asterisk">*</span></label>
+							<select id="ro-body" name="body" onchange='javascript:populateBodyData("ro")'>
+								<option disabled selected value> -- Select -- </option>
+							</select>
+						</div><br>
+						<div class="form-field clearfix">
+							<label>Atmosphere Height [km]</label>
+							<input type="number" step="any" id="ro-atmHeight" onblur="javascript:mask(this)"
+								onfocus="javascript:unmask(this)" readonly />
+						</div>
+						<div class="form-field-divider"></div>
+						<div class="form-field clearfix">
+							<label>SOI Altitude [km]</label>
+							<input type="number" step="any" id="ro-soiAltitude" onblur="javascript:mask(this)"
+								onfocus="javascript:unmask(this)" readonly />
+						</div>
+						<div class="form-field-divider"></div>
+						<div class="form-field clearfix">
+							<label>Rotation Period [s]</label>
+							<input type="number" step="any" id="ro-rotationPeriod" onblur="javascript:mask(this)"
+								onfocus="javascript:unmask(this)" readonly />
+						</div>
+					</fieldset>
+					<fieldset class="container">
+						<legend>Orbit Information</legend>
+						<div class="form-field clearfix">
+							<label>Final Altitude [km]<span class="asterisk">*</span></label>
+							<input type="number" oninput='javascript:recalculateResonantOrbitData("ro")' step="any"
+								id="ro-altitude" onblur="javascript:mask(this)" onfocus="javascript:unmask(this)" />
+						</div>
+						<div class="form-field-divider"></div>
+						<div class="form-field clearfix">
+							<label>Number Of Satellites<span class="asterisk">*</span></label>
+							<input type="number" oninput='javascript:recalculateResonantOrbitData("ro")' step="1"
+								id="ro-numSats" onblur="javascript:mask(this)" onfocus="javascript:unmask(this)" />
+						</div>
+						<div class="form-field-divider"></div>
+						<div class="form-field clearfix">
+							<label
+								title="How often you want to deploy satellites. E.g. Every orbit, every second orbit, etc.">Orbits
+								Between Dep. [1-10]<span class="asterisk">*</span></label>
+							<input type="number" oninput='javascript:recalculateResonantOrbitData("ro")' step="1"
+								id="ro-orbitSkip" onblur="javascript:mask(this)" onfocus="javascript:unmask(this)" />
+						</div>
+						<div class="form-field-divider"></div>
+						<div class="form-field clearfix">
+							<label>Orbit Direction<span class="asterisk">*</span></label>
+							<span class="radio-span">
+								<input type="radio" name="orbit-direction"
+									onclick='javascript:recalculateResonantOrbitData("ro")' id="ro-orbitUnder"
+									checked />
+								<label for="ro-orbitUnder">Under</label>
+								<input type="radio" name="orbit-direction"
+									onclick='javascript:recalculateResonantOrbitData("ro")' id="ro-orbitOver" />
+								<label for="ro-orbitUnder">Over</label>
+							</span>
+						</div><br>
+						<div class="form-field clearfix">
+							<label>Apoapsis [km]</label>
+							<input type="number" step="any" id="ro-apoapsis" onblur="javascript:mask(this)"
+								onfocus="javascript:unmask(this)" readonly />
+						</div>
+						<div class="form-field-divider"></div>
+						<div class="form-field clearfix">
+							<label>Periapsis [km]</label>
+							<input type="number" step="any" id="ro-periapsis" onblur="javascript:mask(this)"
+								onfocus="javascript:unmask(this)" readonly />
+						</div>
+						<div class="form-field-divider"></div>
+						<div class="form-field clearfix">
+							<label>Circularising DeltaV [m/s]</label>
+							<input type="number" step="any" id="ro-deltaV" onblur="javascript:mask(this)"
+								onfocus="javascript:unmask(this)" readonly />
+						</div><br>
+						<div class="form-field clearfix">
+							<label>Final Orbit Period [s]</label>
+							<input type="number" step="any" id="ro-finalPeriod" onblur="javascript:mask(this)"
+								onfocus="javascript:unmask(this)" readonly />
+						</div>
+						<div class="form-field-divider"></div>
+						<div class="form-field clearfix">
+							<label>Resonant Orbit Period [s]</label>
+							<input type="number" step="any" id="ro-resonantPeriod" onblur="javascript:mask(this)"
+								onfocus="javascript:unmask(this)" readonly />
+						</div>
+						<div class="form-field-divider"></div>
+						<div class="form-field clearfix">
+							<label title="Difference between the two orbital periods.">Delta Period [s]</label>
+							<input type="number" step="any" id="ro-deltaPeriod" onblur="javascript:mask(this)"
+								onfocus="javascript:unmask(this)" readonly />
+						</div>
+					</fieldset>
 				</form>
 			</div>
 		</section>
